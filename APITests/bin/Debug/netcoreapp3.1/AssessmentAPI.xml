@@ -1,0 +1,291 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AssessmentAPI</name>
+    </assembly>
+    <members>
+        <member name="M:AssessmentAPI.Controllers.BatchController.#ctor(AssessmentAPI.Service.IBatchService,AssessmentAPI.Logger.ILogger)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="batchService">Batch Service</param>
+            <param name="logger">Logger service</param>
+        </member>
+        <member name="M:AssessmentAPI.Controllers.BatchController.Batch(AssessmentAPI.Models.BatchRequest)">
+            <summary>
+            Create a new batch to upload files into
+            </summary>
+            <param name="batchRequest">Request Body</param>
+            <returns>Returns the batch id</returns>
+            <response code="401">Unauthorised - either you have not provided any credentials, or your credentials are not recognised</response>
+            <response code="403">Forbidden - you have been authorised, but you are not allowed to access this resource</response>
+            <response code="400">Bad Request - there are one or more errors in the specified parameters</response>
+        </member>
+        <member name="M:AssessmentAPI.Controllers.BatchController.GetBatchDetails(System.Guid)">
+            <summary>
+            Get details of the batch including links to all the files in the batch
+            </summary>
+            <remarks>This get will include full details of the batch, for example it's status, the files in the batch.</remarks>
+            <param name="batchId">A Batch ID</param>
+            <returns>Returns details about the batch</returns>
+            <response code="200">OK - Return details about the batch</response>
+            <response code="401">Unauthorised - either you have not provided any credentials, or your credentials are not recognised</response>
+            <response code="403">Forbidden - you have been authorised, but you are not allowed to access this resource</response>
+            <response code="404">Not Found - Could be that the batch ID doesn't exist</response>
+            <response code="410">Gone - the batch has been expired and is no longer available</response>
+            <response code="400">Bad Request - could be a invalid batch Id format. Batch IDs should be a GUID. A valid GUID that doesn't match a batch ID will return a 404</response>
+        </member>
+        <member name="M:AssessmentAPI.Logger.ILogger.LogInfo(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Log information severity to Application Insights
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="properties">Custom properties</param>
+        </member>
+        <member name="M:AssessmentAPI.Logger.ILogger.LogError(System.Exception,System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Log error severity to Application Insights
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="message">Message to log</param>
+            <param name="properties">Custom properties</param>
+        </member>
+        <member name="M:AssessmentAPI.Logger.ILogger.LogWarning(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Log warning severity to Application Insights
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="properties">Custom properties</param>
+        </member>
+        <member name="M:AssessmentAPI.Logger.Log.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="configuration">Configuration Service</param>
+        </member>
+        <member name="M:AssessmentAPI.Logger.Log.LogInfo(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Log information severity to Application Insights
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="properties">Custom properties</param>
+        </member>
+        <member name="M:AssessmentAPI.Logger.Log.LogError(System.Exception,System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Log error severity to Application Insights
+            </summary>
+            <param name="ex">Exception</param>
+            <param name="message">Message to log</param>
+            <param name="properties">Custom properties</param>
+        </member>
+        <member name="M:AssessmentAPI.Logger.Log.LogWarning(System.String,System.ValueTuple{System.String,System.String}[])">
+            <summary>
+            Log warning severity to Application Insights
+            </summary>
+            <param name="message">Message to log</param>
+            <param name="properties">Custom properties</param>
+            <returns>Correlation Id</returns>
+        </member>
+        <member name="M:AssessmentAPI.Logger.Log.clearDictionaryProperties">
+            <summary>
+            To clear Dictionary properties on every call
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.BatchId">
+            <summary>
+            Batch Id
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.Attritube">
+            <summary>
+            Attribute Array
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.BusinessUnit">
+            <summary>
+            Business Unit Name
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.BatchPublishedDate">
+            <summary>
+            Publish date
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.ExpiryDate">
+            <summary>
+            Expiry Date
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.Files">
+            <summary>
+            Files array
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.Attritube1.Key">
+            <summary>
+            Key
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.Attritube1.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.File.FileName">
+            <summary>
+            File Name
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.File.FileSize">
+            <summary>
+            File Size
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.File.MimeType">
+            <summary>
+            MIME Type
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.File.Hash">
+            <summary>
+            Hash
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.File.Attritube">
+            <summary>
+            Attribute Array
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchDetailsResponse.File.Links">
+            <summary>
+            Links
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.BusinessUnit">
+            <summary>
+            Business Unit Name
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.Acl1">
+            <summary>
+            Acl
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.Attritubes">
+            <summary>
+            Attritube Array
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.ExpiryDate">
+            <summary>
+            Expiry Date
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.Acl.ReadUsers">
+            <summary>
+            Read users
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.Acl.ReadGroups">
+            <summary>
+            Read groups
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.Attritube.Key">
+            <summary>
+            Key
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchRequest.Attritube.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.BatchResponse.BatchId">
+            <summary>
+            Batch ID
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.ErrorResponse.CorrelationId">
+            <summary>
+            Correlation ID
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.ErrorResponse.Errors">
+            <summary>
+            Errors Array
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.ErrorResponse.Error.Source">
+            <summary>
+            Source of the error
+            </summary>
+        </member>
+        <member name="P:AssessmentAPI.Models.ErrorResponse.Error.Description">
+            <summary>
+            Description of the error
+            </summary>
+        </member>
+        <member name="M:AssessmentAPI.Service.BatchService.ValidateBusinessUnit(System.String)">
+            <summary>
+            Checks for business unit is appropriate
+            </summary>
+            <param name="businessUnit">Business Unit Name</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.BatchService.CreateBatch(AssessmentAPI.Models.BatchRequest)">
+            <summary>
+            Create a new batch
+            </summary>
+            <param name="batchRequest">Batch Details</param>
+            <returns>Batch Id</returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.BatchService.ValidateBatchID(System.Guid)">
+            <summary>
+            Checks for Batch ID
+            </summary>
+            <param name="batchId">Batch ID</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.BatchService.GetBatchDetails(System.Guid)">
+            <summary>
+            Gets the Batch Details
+            </summary>
+            <param name="batchId">Batch ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.IBatchService.ValidateBusinessUnit(System.String)">
+            <summary>
+            Checks for business unit is appropriate
+            </summary>
+            <param name="businessUnit">Business Unit Name</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.IBatchService.CreateBatch(AssessmentAPI.Models.BatchRequest)">
+            <summary>
+            Create a new batch
+            </summary>
+            <param name="batchRequest">Batch Details</param>
+            <returns></returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.IBatchService.ValidateBatchID(System.Guid)">
+            <summary>
+            Checks for Batch ID
+            </summary>
+            <param name="batchId">Batch ID</param>
+            <returns>Status Codes</returns>
+        </member>
+        <member name="M:AssessmentAPI.Service.IBatchService.GetBatchDetails(System.Guid)">
+            <summary>
+            Gets the Batch Details
+            </summary>
+            <param name="batchId">Batch ID</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
